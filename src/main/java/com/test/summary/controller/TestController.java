@@ -1,6 +1,7 @@
 package com.test.summary.controller;
 
 import com.test.summary.common.component.RedisClient;
+import com.test.summary.common.component.logaspect.ApplyAnnotation;
 import com.test.summary.common.constants.ResultEntity;
 import com.test.summary.service.TestServer;
 import io.swagger.annotations.ApiOperation;
@@ -35,7 +36,7 @@ public class TestController {
     @ApiOperation(value = "login", notes = "login")
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(HttpServletRequest request, Model model) {
-        redisClient.set("loginUser",request.getSession().getId(),600l);
+        redisClient.set("loginUser", request.getSession().getId());
         List<String> list = new ArrayList<>();
         list.add("a");
         list.add("b");
@@ -77,6 +78,7 @@ public class TestController {
     @ResponseBody
     @ApiOperation(value = "getSqlServer", notes = "getSqlServer")
     @RequestMapping(value = "/getSqlServer", method = RequestMethod.POST)
+    @ApplyAnnotation
     public ResultEntity getSqlServer() {
         System.out.println("2222222222222");
         System.out.println("1111111111111");

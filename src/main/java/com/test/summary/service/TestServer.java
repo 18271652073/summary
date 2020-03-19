@@ -2,10 +2,12 @@ package com.test.summary.service;
 
 import com.test.summary.common.component.ConfigValueComponent;
 import com.test.summary.common.component.RedisClient;
+import com.test.summary.common.component.logaspect.ApplyAnnotation;
 import com.test.summary.dom.mysql.entity.OrderBase;
 import com.test.summary.dom.mysql.mapper.OrderBaseMapper;
 import com.test.summary.dom.sqlserver.entity.ItemSku;
 import com.test.summary.dom.sqlserver.mapper.ItemSkuMapper;
+import com.test.summary.dom.sqlserver.repository.SysConfigRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -31,9 +33,12 @@ public class TestServer {
     private ConfigValueComponent configValueComponent;
     @Autowired
     private RedisClient redisClient;
+    @Autowired
+    private SysConfigRepository sysConfigRepository;
 
     @Transactional(rollbackFor = Exception.class, transactionManager = "transactionManagerMySql")
 //    , isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED
+    @ApplyAnnotation
     public String getMysql() {
         OrderBase orderBase = orderBaseMapper.selectByPrimaryKey(2);
         orderBase.setCustomerName("test1");
@@ -43,10 +48,12 @@ public class TestServer {
         return orderBase.toString();
     }
 
+    @ApplyAnnotation
     public String getSqlServer() {
-        redisClient.set("测试","测试",6000l);
-        redisClient.set("test","test",6000l);
-        ItemSku itemSku = itemSkuMapper.selectByPrimaryKey("100000000PCS");
+        redisClient.set("测试", "测试", 6000l);
+        redisClient.set("test", "test", 6000l);
+//        ItemSku itemSku = itemSkuMapper.selectByPrimaryKey("100000000PCS");
+        ItemSku itemSku = sysConfigRepository.getDes3Key("12312", "100000000PCS");
         return itemSku.toString();
     }
 
