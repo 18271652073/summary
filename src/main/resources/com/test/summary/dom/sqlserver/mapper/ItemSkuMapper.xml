@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.summary.dom.sqlserver.mapper.ItemSkuMapper">
+  <resultMap id="BaseResultMap" type="com.test.summary.dom.sqlserver.entity.ItemSku">
+    <id column="ItemSkuId" jdbcType="VARCHAR" property="itemSkuId" />
+    <result column="ItemId" jdbcType="VARCHAR" property="itemId" />
+    <result column="ColorId" jdbcType="VARCHAR" property="colorId" />
+    <result column="SizeId" jdbcType="VARCHAR" property="sizeId" />
+    <result column="ItemSkuName" jdbcType="VARCHAR" property="itemSkuName" />
+    <result column="SalePrice" jdbcType="NUMERIC" property="salePrice" />
+    <result column="IsSale" jdbcType="CHAR" property="isSale" />
+    <result column="IsSaleOnWeb" jdbcType="CHAR" property="isSaleOnWeb" />
+    <result column="ProductSkuId" jdbcType="VARCHAR" property="productSkuId" />
+    <result column="Status" jdbcType="CHAR" property="status" />
+    <result column="UnitId" jdbcType="VARCHAR" property="unitId" />
+    <result column="Qty" jdbcType="DECIMAL" property="qty" />
+    <result column="PackageName" jdbcType="VARCHAR" property="packageName" />
+    <result column="IsDefault" jdbcType="CHAR" property="isDefault" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ItemSkuId, ItemId, ColorId, SizeId, ItemSkuName, SalePrice, IsSale, IsSaleOnWeb, 
+    ProductSkuId, Status, UnitId, Qty, PackageName, IsDefault
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rsds..TItemSku
+    where ItemSkuId = #{itemSkuId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rsds..TItemSku
+    where ItemSkuId = #{itemSkuId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.test.summary.dom.sqlserver.entity.ItemSku">
+    <selectKey keyProperty="itemSkuId" order="AFTER" resultType="java.lang.String">
+      SQL_Server
+    </selectKey>
+    insert into rsds..TItemSku (ItemId, ColorId, SizeId, 
+      ItemSkuName, SalePrice, IsSale, 
+      IsSaleOnWeb, ProductSkuId, Status, 
+      UnitId, Qty, PackageName, 
+      IsDefault)
+    values (#{itemId,jdbcType=VARCHAR}, #{colorId,jdbcType=VARCHAR}, #{sizeId,jdbcType=VARCHAR}, 
+      #{itemSkuName,jdbcType=VARCHAR}, #{salePrice,jdbcType=NUMERIC}, #{isSale,jdbcType=CHAR}, 
+      #{isSaleOnWeb,jdbcType=CHAR}, #{productSkuId,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{unitId,jdbcType=VARCHAR}, #{qty,jdbcType=DECIMAL}, #{packageName,jdbcType=VARCHAR}, 
+      #{isDefault,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.summary.dom.sqlserver.entity.ItemSku">
+    <selectKey keyProperty="itemSkuId" order="AFTER" resultType="java.lang.String">
+      SQL_Server
+    </selectKey>
+    insert into rsds..TItemSku
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        ItemId,
+      </if>
+      <if test="colorId != null">
+        ColorId,
+      </if>
+      <if test="sizeId != null">
+        SizeId,
+      </if>
+      <if test="itemSkuName != null">
+        ItemSkuName,
+      </if>
+      <if test="salePrice != null">
+        SalePrice,
+      </if>
+      <if test="isSale != null">
+        IsSale,
+      </if>
+      <if test="isSaleOnWeb != null">
+        IsSaleOnWeb,
+      </if>
+      <if test="productSkuId != null">
+        ProductSkuId,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="unitId != null">
+        UnitId,
+      </if>
+      <if test="qty != null">
+        Qty,
+      </if>
+      <if test="packageName != null">
+        PackageName,
+      </if>
+      <if test="isDefault != null">
+        IsDefault,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="colorId != null">
+        #{colorId,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeId != null">
+        #{sizeId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemSkuName != null">
+        #{itemSkuName,jdbcType=VARCHAR},
+      </if>
+      <if test="salePrice != null">
+        #{salePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="isSale != null">
+        #{isSale,jdbcType=CHAR},
+      </if>
+      <if test="isSaleOnWeb != null">
+        #{isSaleOnWeb,jdbcType=CHAR},
+      </if>
+      <if test="productSkuId != null">
+        #{productSkuId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null">
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="packageName != null">
+        #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null">
+        #{isDefault,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.summary.dom.sqlserver.entity.ItemSku">
+    update rsds..TItemSku
+    <set>
+      <if test="itemId != null">
+        ItemId = #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="colorId != null">
+        ColorId = #{colorId,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeId != null">
+        SizeId = #{sizeId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemSkuName != null">
+        ItemSkuName = #{itemSkuName,jdbcType=VARCHAR},
+      </if>
+      <if test="salePrice != null">
+        SalePrice = #{salePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="isSale != null">
+        IsSale = #{isSale,jdbcType=CHAR},
+      </if>
+      <if test="isSaleOnWeb != null">
+        IsSaleOnWeb = #{isSaleOnWeb,jdbcType=CHAR},
+      </if>
+      <if test="productSkuId != null">
+        ProductSkuId = #{productSkuId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="unitId != null">
+        UnitId = #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null">
+        Qty = #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="packageName != null">
+        PackageName = #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null">
+        IsDefault = #{isDefault,jdbcType=CHAR},
+      </if>
+    </set>
+    where ItemSkuId = #{itemSkuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.summary.dom.sqlserver.entity.ItemSku">
+    update rsds..TItemSku
+    set ItemId = #{itemId,jdbcType=VARCHAR},
+      ColorId = #{colorId,jdbcType=VARCHAR},
+      SizeId = #{sizeId,jdbcType=VARCHAR},
+      ItemSkuName = #{itemSkuName,jdbcType=VARCHAR},
+      SalePrice = #{salePrice,jdbcType=NUMERIC},
+      IsSale = #{isSale,jdbcType=CHAR},
+      IsSaleOnWeb = #{isSaleOnWeb,jdbcType=CHAR},
+      ProductSkuId = #{productSkuId,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=CHAR},
+      UnitId = #{unitId,jdbcType=VARCHAR},
+      Qty = #{qty,jdbcType=DECIMAL},
+      PackageName = #{packageName,jdbcType=VARCHAR},
+      IsDefault = #{isDefault,jdbcType=CHAR}
+    where ItemSkuId = #{itemSkuId,jdbcType=VARCHAR}
+  </update>
+</mapper>

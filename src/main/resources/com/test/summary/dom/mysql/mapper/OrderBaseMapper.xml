@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.summary.dom.mysql.mapper.OrderBaseMapper">
+  <resultMap id="BaseResultMap" type="com.test.summary.dom.mysql.entity.OrderBase">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="billing_id" jdbcType="VARCHAR" property="billingId" />
+    <result column="order_id_three" jdbcType="VARCHAR" property="orderIdThree" />
+    <result column="parent_package_code" jdbcType="VARCHAR" property="parentPackageCode" />
+    <result column="sale_org" jdbcType="VARCHAR" property="saleOrg" />
+    <result column="company_code" jdbcType="VARCHAR" property="companyCode" />
+    <result column="product_group" jdbcType="VARCHAR" property="productGroup" />
+    <result column="sale_channel" jdbcType="VARCHAR" property="saleChannel" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="invoice_code" jdbcType="VARCHAR" property="invoiceCode" />
+    <result column="invoice_name" jdbcType="VARCHAR" property="invoiceName" />
+    <result column="delivery_code" jdbcType="VARCHAR" property="deliveryCode" />
+    <result column="delivery_name" jdbcType="VARCHAR" property="deliveryName" />
+    <result column="profit_center_code" jdbcType="VARCHAR" property="profitCenterCode" />
+    <result column="profit_center_name" jdbcType="VARCHAR" property="profitCenterName" />
+    <result column="tax_rate" jdbcType="VARCHAR" property="taxRate" />
+    <result column="customer_order_id" jdbcType="VARCHAR" property="customerOrderId" />
+    <result column="customer_group" jdbcType="VARCHAR" property="customerGroup" />
+    <result column="sale_order_type" jdbcType="VARCHAR" property="saleOrderType" />
+    <result column="sale_order_type_name" jdbcType="VARCHAR" property="saleOrderTypeName" />
+    <result column="ds_package_id" jdbcType="VARCHAR" property="dsPackageId" />
+    <result column="billing_category" jdbcType="VARCHAR" property="billingCategory" />
+    <result column="invoice_total_type" jdbcType="VARCHAR" property="invoiceTotalType" />
+    <result column="invoice_type" jdbcType="VARCHAR" property="invoiceType" />
+    <result column="line_number" jdbcType="INTEGER" property="lineNumber" />
+    <result column="invoice_date" jdbcType="TIMESTAMP" property="invoiceDate" />
+    <result column="billing_original_value" jdbcType="DECIMAL" property="billingOriginalValue" />
+    <result column="original_value" jdbcType="DECIMAL" property="originalValue" />
+    <result column="tax_inclusive_value" jdbcType="DECIMAL" property="taxInclusiveValue" />
+    <result column="billing_inclusive_value" jdbcType="DECIMAL" property="billingInclusiveValue" />
+    <result column="billing_tax_inclusive_value" jdbcType="DECIMAL" property="billingTaxInclusiveValue" />
+    <result column="price_difference" jdbcType="DECIMAL" property="priceDifference" />
+    <result column="discount_percent" jdbcType="DECIMAL" property="discountPercent" />
+    <result column="discount_value" jdbcType="DECIMAL" property="discountValue" />
+    <result column="expense_ratio" jdbcType="DECIMAL" property="expenseRatio" />
+    <result column="expense_value" jdbcType="DECIMAL" property="expenseValue" />
+    <result column="tail_difference" jdbcType="DECIMAL" property="tailDifference" />
+    <result column="package_id" jdbcType="VARCHAR" property="packageId" />
+    <result column="order_status" jdbcType="CHAR" property="orderStatus" />
+    <result column="delivery_address" jdbcType="VARCHAR" property="deliveryAddress" />
+    <result column="consignee_company" jdbcType="VARCHAR" property="consigneeCompany" />
+    <result column="contact" jdbcType="VARCHAR" property="contact" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="express_type" jdbcType="CHAR" property="expressType" />
+    <result column="is_need_code" jdbcType="CHAR" property="isNeedCode" />
+    <result column="is_need_receipt" jdbcType="CHAR" property="isNeedReceipt" />
+    <result column="is_lack_tax_classification_code" jdbcType="CHAR" property="isLackTaxClassificationCode" />
+    <result column="is_tax_difference_abnormal" jdbcType="CHAR" property="isTaxDifferenceAbnormal" />
+    <result column="package_status" jdbcType="CHAR" property="packageStatus" />
+    <result column="billing_type" jdbcType="CHAR" property="billingType" />
+    <result column="delivery_cost" jdbcType="DECIMAL" property="deliveryCost" />
+    <result column="delivery_qty" jdbcType="INTEGER" property="deliveryQty" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="add_no" jdbcType="VARCHAR" property="addNo" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="update_no" jdbcType="VARCHAR" property="updateNo" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, billing_id, order_id_three, parent_package_code, sale_org, company_code, product_group, 
+    sale_channel, customer_code, customer_name, invoice_code, invoice_name, delivery_code, 
+    delivery_name, profit_center_code, profit_center_name, tax_rate, customer_order_id, 
+    customer_group, sale_order_type, sale_order_type_name, ds_package_id, billing_category, 
+    invoice_total_type, invoice_type, line_number, invoice_date, billing_original_value, 
+    original_value, tax_inclusive_value, billing_inclusive_value, billing_tax_inclusive_value, 
+    price_difference, discount_percent, discount_value, expense_ratio, expense_value, 
+    tail_difference, package_id, order_status, delivery_address, consignee_company, contact, 
+    phone, mobile, express_type, is_need_code, is_need_receipt, is_lack_tax_classification_code, 
+    is_tax_difference_abnormal, package_status, billing_type, delivery_cost, delivery_qty, 
+    status, add_no, add_time, update_no, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_base
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order_base
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.test.summary.dom.mysql.entity.OrderBase" useGeneratedKeys="true">
+    insert into t_order_base (billing_id, order_id_three, parent_package_code, 
+      sale_org, company_code, product_group, 
+      sale_channel, customer_code, customer_name, 
+      invoice_code, invoice_name, delivery_code, 
+      delivery_name, profit_center_code, profit_center_name, 
+      tax_rate, customer_order_id, customer_group, 
+      sale_order_type, sale_order_type_name, ds_package_id, 
+      billing_category, invoice_total_type, invoice_type, 
+      line_number, invoice_date, billing_original_value, 
+      original_value, tax_inclusive_value, billing_inclusive_value, 
+      billing_tax_inclusive_value, price_difference, 
+      discount_percent, discount_value, expense_ratio, 
+      expense_value, tail_difference, package_id, 
+      order_status, delivery_address, consignee_company, 
+      contact, phone, mobile, 
+      express_type, is_need_code, is_need_receipt, 
+      is_lack_tax_classification_code, is_tax_difference_abnormal, 
+      package_status, billing_type, delivery_cost, 
+      delivery_qty, status, add_no, 
+      add_time, update_no, update_time
+      )
+    values (#{billingId,jdbcType=VARCHAR}, #{orderIdThree,jdbcType=VARCHAR}, #{parentPackageCode,jdbcType=VARCHAR}, 
+      #{saleOrg,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, #{productGroup,jdbcType=VARCHAR}, 
+      #{saleChannel,jdbcType=VARCHAR}, #{customerCode,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, 
+      #{invoiceCode,jdbcType=VARCHAR}, #{invoiceName,jdbcType=VARCHAR}, #{deliveryCode,jdbcType=VARCHAR}, 
+      #{deliveryName,jdbcType=VARCHAR}, #{profitCenterCode,jdbcType=VARCHAR}, #{profitCenterName,jdbcType=VARCHAR}, 
+      #{taxRate,jdbcType=VARCHAR}, #{customerOrderId,jdbcType=VARCHAR}, #{customerGroup,jdbcType=VARCHAR}, 
+      #{saleOrderType,jdbcType=VARCHAR}, #{saleOrderTypeName,jdbcType=VARCHAR}, #{dsPackageId,jdbcType=VARCHAR}, 
+      #{billingCategory,jdbcType=VARCHAR}, #{invoiceTotalType,jdbcType=VARCHAR}, #{invoiceType,jdbcType=VARCHAR}, 
+      #{lineNumber,jdbcType=INTEGER}, #{invoiceDate,jdbcType=TIMESTAMP}, #{billingOriginalValue,jdbcType=DECIMAL}, 
+      #{originalValue,jdbcType=DECIMAL}, #{taxInclusiveValue,jdbcType=DECIMAL}, #{billingInclusiveValue,jdbcType=DECIMAL}, 
+      #{billingTaxInclusiveValue,jdbcType=DECIMAL}, #{priceDifference,jdbcType=DECIMAL}, 
+      #{discountPercent,jdbcType=DECIMAL}, #{discountValue,jdbcType=DECIMAL}, #{expenseRatio,jdbcType=DECIMAL}, 
+      #{expenseValue,jdbcType=DECIMAL}, #{tailDifference,jdbcType=DECIMAL}, #{packageId,jdbcType=VARCHAR}, 
+      #{orderStatus,jdbcType=CHAR}, #{deliveryAddress,jdbcType=VARCHAR}, #{consigneeCompany,jdbcType=VARCHAR}, 
+      #{contact,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{expressType,jdbcType=CHAR}, #{isNeedCode,jdbcType=CHAR}, #{isNeedReceipt,jdbcType=CHAR}, 
+      #{isLackTaxClassificationCode,jdbcType=CHAR}, #{isTaxDifferenceAbnormal,jdbcType=CHAR}, 
+      #{packageStatus,jdbcType=CHAR}, #{billingType,jdbcType=CHAR}, #{deliveryCost,jdbcType=DECIMAL}, 
+      #{deliveryQty,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, #{addNo,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{updateNo,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.test.summary.dom.mysql.entity.OrderBase" useGeneratedKeys="true">
+    insert into t_order_base
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="billingId != null">
+        billing_id,
+      </if>
+      <if test="orderIdThree != null">
+        order_id_three,
+      </if>
+      <if test="parentPackageCode != null">
+        parent_package_code,
+      </if>
+      <if test="saleOrg != null">
+        sale_org,
+      </if>
+      <if test="companyCode != null">
+        company_code,
+      </if>
+      <if test="productGroup != null">
+        product_group,
+      </if>
+      <if test="saleChannel != null">
+        sale_channel,
+      </if>
+      <if test="customerCode != null">
+        customer_code,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="invoiceCode != null">
+        invoice_code,
+      </if>
+      <if test="invoiceName != null">
+        invoice_name,
+      </if>
+      <if test="deliveryCode != null">
+        delivery_code,
+      </if>
+      <if test="deliveryName != null">
+        delivery_name,
+      </if>
+      <if test="profitCenterCode != null">
+        profit_center_code,
+      </if>
+      <if test="profitCenterName != null">
+        profit_center_name,
+      </if>
+      <if test="taxRate != null">
+        tax_rate,
+      </if>
+      <if test="customerOrderId != null">
+        customer_order_id,
+      </if>
+      <if test="customerGroup != null">
+        customer_group,
+      </if>
+      <if test="saleOrderType != null">
+        sale_order_type,
+      </if>
+      <if test="saleOrderTypeName != null">
+        sale_order_type_name,
+      </if>
+      <if test="dsPackageId != null">
+        ds_package_id,
+      </if>
+      <if test="billingCategory != null">
+        billing_category,
+      </if>
+      <if test="invoiceTotalType != null">
+        invoice_total_type,
+      </if>
+      <if test="invoiceType != null">
+        invoice_type,
+      </if>
+      <if test="lineNumber != null">
+        line_number,
+      </if>
+      <if test="invoiceDate != null">
+        invoice_date,
+      </if>
+      <if test="billingOriginalValue != null">
+        billing_original_value,
+      </if>
+      <if test="originalValue != null">
+        original_value,
+      </if>
+      <if test="taxInclusiveValue != null">
+        tax_inclusive_value,
+      </if>
+      <if test="billingInclusiveValue != null">
+        billing_inclusive_value,
+      </if>
+      <if test="billingTaxInclusiveValue != null">
+        billing_tax_inclusive_value,
+      </if>
+      <if test="priceDifference != null">
+        price_difference,
+      </if>
+      <if test="discountPercent != null">
+        discount_percent,
+      </if>
+      <if test="discountValue != null">
+        discount_value,
+      </if>
+      <if test="expenseRatio != null">
+        expense_ratio,
+      </if>
+      <if test="expenseValue != null">
+        expense_value,
+      </if>
+      <if test="tailDifference != null">
+        tail_difference,
+      </if>
+      <if test="packageId != null">
+        package_id,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="deliveryAddress != null">
+        delivery_address,
+      </if>
+      <if test="consigneeCompany != null">
+        consignee_company,
+      </if>
+      <if test="contact != null">
+        contact,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="expressType != null">
+        express_type,
+      </if>
+      <if test="isNeedCode != null">
+        is_need_code,
+      </if>
+      <if test="isNeedReceipt != null">
+        is_need_receipt,
+      </if>
+      <if test="isLackTaxClassificationCode != null">
+        is_lack_tax_classification_code,
+      </if>
+      <if test="isTaxDifferenceAbnormal != null">
+        is_tax_difference_abnormal,
+      </if>
+      <if test="packageStatus != null">
+        package_status,
+      </if>
+      <if test="billingType != null">
+        billing_type,
+      </if>
+      <if test="deliveryCost != null">
+        delivery_cost,
+      </if>
+      <if test="deliveryQty != null">
+        delivery_qty,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="addNo != null">
+        add_no,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="updateNo != null">
+        update_no,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="billingId != null">
+        #{billingId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderIdThree != null">
+        #{orderIdThree,jdbcType=VARCHAR},
+      </if>
+      <if test="parentPackageCode != null">
+        #{parentPackageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="saleOrg != null">
+        #{saleOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productGroup != null">
+        #{productGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="saleChannel != null">
+        #{saleChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceCode != null">
+        #{invoiceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceName != null">
+        #{invoiceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryCode != null">
+        #{deliveryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryName != null">
+        #{deliveryName,jdbcType=VARCHAR},
+      </if>
+      <if test="profitCenterCode != null">
+        #{profitCenterCode,jdbcType=VARCHAR},
+      </if>
+      <if test="profitCenterName != null">
+        #{profitCenterName,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRate != null">
+        #{taxRate,jdbcType=VARCHAR},
+      </if>
+      <if test="customerOrderId != null">
+        #{customerOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerGroup != null">
+        #{customerGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="saleOrderType != null">
+        #{saleOrderType,jdbcType=VARCHAR},
+      </if>
+      <if test="saleOrderTypeName != null">
+        #{saleOrderTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="dsPackageId != null">
+        #{dsPackageId,jdbcType=VARCHAR},
+      </if>
+      <if test="billingCategory != null">
+        #{billingCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceTotalType != null">
+        #{invoiceTotalType,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceType != null">
+        #{invoiceType,jdbcType=VARCHAR},
+      </if>
+      <if test="lineNumber != null">
+        #{lineNumber,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceDate != null">
+        #{invoiceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="billingOriginalValue != null">
+        #{billingOriginalValue,jdbcType=DECIMAL},
+      </if>
+      <if test="originalValue != null">
+        #{originalValue,jdbcType=DECIMAL},
+      </if>
+      <if test="taxInclusiveValue != null">
+        #{taxInclusiveValue,jdbcType=DECIMAL},
+      </if>
+      <if test="billingInclusiveValue != null">
+        #{billingInclusiveValue,jdbcType=DECIMAL},
+      </if>
+      <if test="billingTaxInclusiveValue != null">
+        #{billingTaxInclusiveValue,jdbcType=DECIMAL},
+      </if>
+      <if test="priceDifference != null">
+        #{priceDifference,jdbcType=DECIMAL},
+      </if>
+      <if test="discountPercent != null">
+        #{discountPercent,jdbcType=DECIMAL},
+      </if>
+      <if test="discountValue != null">
+        #{discountValue,jdbcType=DECIMAL},
+      </if>
+      <if test="expenseRatio != null">
+        #{expenseRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="expenseValue != null">
+        #{expenseValue,jdbcType=DECIMAL},
+      </if>
+      <if test="tailDifference != null">
+        #{tailDifference,jdbcType=DECIMAL},
+      </if>
+      <if test="packageId != null">
+        #{packageId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=CHAR},
+      </if>
+      <if test="deliveryAddress != null">
+        #{deliveryAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeCompany != null">
+        #{consigneeCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="expressType != null">
+        #{expressType,jdbcType=CHAR},
+      </if>
+      <if test="isNeedCode != null">
+        #{isNeedCode,jdbcType=CHAR},
+      </if>
+      <if test="isNeedReceipt != null">
+        #{isNeedReceipt,jdbcType=CHAR},
+      </if>
+      <if test="isLackTaxClassificationCode != null">
+        #{isLackTaxClassificationCode,jdbcType=CHAR},
+      </if>
+      <if test="isTaxDifferenceAbnormal != null">
+        #{isTaxDifferenceAbnormal,jdbcType=CHAR},
+      </if>
+      <if test="packageStatus != null">
+        #{packageStatus,jdbcType=CHAR},
+      </if>
+      <if test="billingType != null">
+        #{billingType,jdbcType=CHAR},
+      </if>
+      <if test="deliveryCost != null">
+        #{deliveryCost,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryQty != null">
+        #{deliveryQty,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="addNo != null">
+        #{addNo,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateNo != null">
+        #{updateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.summary.dom.mysql.entity.OrderBase">
+    update t_order_base
+    <set>
+      <if test="billingId != null">
+        billing_id = #{billingId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderIdThree != null">
+        order_id_three = #{orderIdThree,jdbcType=VARCHAR},
+      </if>
+      <if test="parentPackageCode != null">
+        parent_package_code = #{parentPackageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="saleOrg != null">
+        sale_org = #{saleOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        company_code = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productGroup != null">
+        product_group = #{productGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="saleChannel != null">
+        sale_channel = #{saleChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        customer_code = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceCode != null">
+        invoice_code = #{invoiceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceName != null">
+        invoice_name = #{invoiceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryCode != null">
+        delivery_code = #{deliveryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryName != null">
+        delivery_name = #{deliveryName,jdbcType=VARCHAR},
+      </if>
+      <if test="profitCenterCode != null">
+        profit_center_code = #{profitCenterCode,jdbcType=VARCHAR},
+      </if>
+      <if test="profitCenterName != null">
+        profit_center_name = #{profitCenterName,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRate != null">
+        tax_rate = #{taxRate,jdbcType=VARCHAR},
+      </if>
+      <if test="customerOrderId != null">
+        customer_order_id = #{customerOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerGroup != null">
+        customer_group = #{customerGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="saleOrderType != null">
+        sale_order_type = #{saleOrderType,jdbcType=VARCHAR},
+      </if>
+      <if test="saleOrderTypeName != null">
+        sale_order_type_name = #{saleOrderTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="dsPackageId != null">
+        ds_package_id = #{dsPackageId,jdbcType=VARCHAR},
+      </if>
+      <if test="billingCategory != null">
+        billing_category = #{billingCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceTotalType != null">
+        invoice_total_type = #{invoiceTotalType,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceType != null">
+        invoice_type = #{invoiceType,jdbcType=VARCHAR},
+      </if>
+      <if test="lineNumber != null">
+        line_number = #{lineNumber,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceDate != null">
+        invoice_date = #{invoiceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="billingOriginalValue != null">
+        billing_original_value = #{billingOriginalValue,jdbcType=DECIMAL},
+      </if>
+      <if test="originalValue != null">
+        original_value = #{originalValue,jdbcType=DECIMAL},
+      </if>
+      <if test="taxInclusiveValue != null">
+        tax_inclusive_value = #{taxInclusiveValue,jdbcType=DECIMAL},
+      </if>
+      <if test="billingInclusiveValue != null">
+        billing_inclusive_value = #{billingInclusiveValue,jdbcType=DECIMAL},
+      </if>
+      <if test="billingTaxInclusiveValue != null">
+        billing_tax_inclusive_value = #{billingTaxInclusiveValue,jdbcType=DECIMAL},
+      </if>
+      <if test="priceDifference != null">
+        price_difference = #{priceDifference,jdbcType=DECIMAL},
+      </if>
+      <if test="discountPercent != null">
+        discount_percent = #{discountPercent,jdbcType=DECIMAL},
+      </if>
+      <if test="discountValue != null">
+        discount_value = #{discountValue,jdbcType=DECIMAL},
+      </if>
+      <if test="expenseRatio != null">
+        expense_ratio = #{expenseRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="expenseValue != null">
+        expense_value = #{expenseValue,jdbcType=DECIMAL},
+      </if>
+      <if test="tailDifference != null">
+        tail_difference = #{tailDifference,jdbcType=DECIMAL},
+      </if>
+      <if test="packageId != null">
+        package_id = #{packageId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=CHAR},
+      </if>
+      <if test="deliveryAddress != null">
+        delivery_address = #{deliveryAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeCompany != null">
+        consignee_company = #{consigneeCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="expressType != null">
+        express_type = #{expressType,jdbcType=CHAR},
+      </if>
+      <if test="isNeedCode != null">
+        is_need_code = #{isNeedCode,jdbcType=CHAR},
+      </if>
+      <if test="isNeedReceipt != null">
+        is_need_receipt = #{isNeedReceipt,jdbcType=CHAR},
+      </if>
+      <if test="isLackTaxClassificationCode != null">
+        is_lack_tax_classification_code = #{isLackTaxClassificationCode,jdbcType=CHAR},
+      </if>
+      <if test="isTaxDifferenceAbnormal != null">
+        is_tax_difference_abnormal = #{isTaxDifferenceAbnormal,jdbcType=CHAR},
+      </if>
+      <if test="packageStatus != null">
+        package_status = #{packageStatus,jdbcType=CHAR},
+      </if>
+      <if test="billingType != null">
+        billing_type = #{billingType,jdbcType=CHAR},
+      </if>
+      <if test="deliveryCost != null">
+        delivery_cost = #{deliveryCost,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryQty != null">
+        delivery_qty = #{deliveryQty,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="addNo != null">
+        add_no = #{addNo,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateNo != null">
+        update_no = #{updateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.summary.dom.mysql.entity.OrderBase">
+    update t_order_base
+    set billing_id = #{billingId,jdbcType=VARCHAR},
+      order_id_three = #{orderIdThree,jdbcType=VARCHAR},
+      parent_package_code = #{parentPackageCode,jdbcType=VARCHAR},
+      sale_org = #{saleOrg,jdbcType=VARCHAR},
+      company_code = #{companyCode,jdbcType=VARCHAR},
+      product_group = #{productGroup,jdbcType=VARCHAR},
+      sale_channel = #{saleChannel,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      invoice_code = #{invoiceCode,jdbcType=VARCHAR},
+      invoice_name = #{invoiceName,jdbcType=VARCHAR},
+      delivery_code = #{deliveryCode,jdbcType=VARCHAR},
+      delivery_name = #{deliveryName,jdbcType=VARCHAR},
+      profit_center_code = #{profitCenterCode,jdbcType=VARCHAR},
+      profit_center_name = #{profitCenterName,jdbcType=VARCHAR},
+      tax_rate = #{taxRate,jdbcType=VARCHAR},
+      customer_order_id = #{customerOrderId,jdbcType=VARCHAR},
+      customer_group = #{customerGroup,jdbcType=VARCHAR},
+      sale_order_type = #{saleOrderType,jdbcType=VARCHAR},
+      sale_order_type_name = #{saleOrderTypeName,jdbcType=VARCHAR},
+      ds_package_id = #{dsPackageId,jdbcType=VARCHAR},
+      billing_category = #{billingCategory,jdbcType=VARCHAR},
+      invoice_total_type = #{invoiceTotalType,jdbcType=VARCHAR},
+      invoice_type = #{invoiceType,jdbcType=VARCHAR},
+      line_number = #{lineNumber,jdbcType=INTEGER},
+      invoice_date = #{invoiceDate,jdbcType=TIMESTAMP},
+      billing_original_value = #{billingOriginalValue,jdbcType=DECIMAL},
+      original_value = #{originalValue,jdbcType=DECIMAL},
+      tax_inclusive_value = #{taxInclusiveValue,jdbcType=DECIMAL},
+      billing_inclusive_value = #{billingInclusiveValue,jdbcType=DECIMAL},
+      billing_tax_inclusive_value = #{billingTaxInclusiveValue,jdbcType=DECIMAL},
+      price_difference = #{priceDifference,jdbcType=DECIMAL},
+      discount_percent = #{discountPercent,jdbcType=DECIMAL},
+      discount_value = #{discountValue,jdbcType=DECIMAL},
+      expense_ratio = #{expenseRatio,jdbcType=DECIMAL},
+      expense_value = #{expenseValue,jdbcType=DECIMAL},
+      tail_difference = #{tailDifference,jdbcType=DECIMAL},
+      package_id = #{packageId,jdbcType=VARCHAR},
+      order_status = #{orderStatus,jdbcType=CHAR},
+      delivery_address = #{deliveryAddress,jdbcType=VARCHAR},
+      consignee_company = #{consigneeCompany,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      express_type = #{expressType,jdbcType=CHAR},
+      is_need_code = #{isNeedCode,jdbcType=CHAR},
+      is_need_receipt = #{isNeedReceipt,jdbcType=CHAR},
+      is_lack_tax_classification_code = #{isLackTaxClassificationCode,jdbcType=CHAR},
+      is_tax_difference_abnormal = #{isTaxDifferenceAbnormal,jdbcType=CHAR},
+      package_status = #{packageStatus,jdbcType=CHAR},
+      billing_type = #{billingType,jdbcType=CHAR},
+      delivery_cost = #{deliveryCost,jdbcType=DECIMAL},
+      delivery_qty = #{deliveryQty,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      add_no = #{addNo,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_no = #{updateNo,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
