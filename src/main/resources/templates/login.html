@@ -1,0 +1,14 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 th:text="|Hello ${name}|"></h1>
+    <ul th:each="str:${strList}">
+        <li th:text="${str}"></li>
+    </ul>
+    <div th:if="${show}">可见</div>
+    </body>
+</html>
