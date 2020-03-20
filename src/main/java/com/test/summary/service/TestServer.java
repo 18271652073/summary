@@ -3,6 +3,7 @@ package com.test.summary.service;
 import com.test.summary.common.component.ConfigValueComponent;
 import com.test.summary.common.component.RedisClient;
 import com.test.summary.common.component.logaspect.ApplyAnnotation;
+import com.test.summary.common.constants.ResultEntity;
 import com.test.summary.dom.mysql.entity.OrderBase;
 import com.test.summary.dom.mysql.mapper.OrderBaseMapper;
 import com.test.summary.dom.sqlserver.entity.ItemSku;
@@ -39,13 +40,13 @@ public class TestServer {
     @Transactional(rollbackFor = Exception.class, transactionManager = "transactionManagerMySql")
 //    , isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED
     @ApplyAnnotation
-    public String getMysql() {
+    public ResultEntity getMysql() {
         OrderBase orderBase = orderBaseMapper.selectByPrimaryKey(2);
         orderBase.setCustomerName("test1");
 //        configValueComponent.ss();
         orderBaseMapper.updateByPrimaryKey(orderBase);
-        int a = 1 / 0;
-        return orderBase.toString();
+//        int a = 1 / 0;
+        return ResultEntity.ok().setResult(orderBase.toString());
     }
 
     @ApplyAnnotation

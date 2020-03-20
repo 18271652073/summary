@@ -72,7 +72,7 @@ public class TestController {
     @ApiOperation(value = "getMysql", notes = "getMysql")
     @RequestMapping(value = "/getMysql", method = RequestMethod.POST)
     public ResultEntity getMysql() {
-        return ResultEntity.ok().setResult(testServer.getMysql());
+        return testServer.getMysql();
     }
 
     @ResponseBody

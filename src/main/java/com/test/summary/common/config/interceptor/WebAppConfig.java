@@ -38,6 +38,8 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                 //被添加的路径直接通过，部进入拦截操作。所以这些方法无法通过拦截器加日志。
                 "你的登陆路径",            //登录
                 "/test/login",           //测试登录
+                "/error",                //错误404页面
+                "/swagger-resources/**", //swagger
                 "/**/*.html",            //html静态资源
                 "/**/*.js",              //js静态资源
                 "/**/*.css",             //css静态资源

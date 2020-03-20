@@ -9,6 +9,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.Enumeration;
 
@@ -53,7 +54,9 @@ public class WebLogAspect {
     }
 
     @Around("webLog() || applyAnnotation()")
-    public Object around(ProceedingJoinPoint pjp) throws Throwable {
+    public void around(ProceedingJoinPoint pjp) throws Throwable {
+        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletResponse response = servletRequestAttributes.getResponse();
         log.info("==================方法环绕前置start=====================>");
         long begin = System.nanoTime();
         //这句必须有 往下执行方法
@@ -64,7 +67,8 @@ public class WebLogAspect {
                 pjp.getSignature().toString(), Arrays.toString(pjp.getArgs()), (end - begin), (end - begin) / 1000000);
         log.info("返回数据：{}", result);
         log.info("==================方法环绕end======================>");
-        return result;
+        response.setHeader("content-type", "text/html;charset=UTF-8");
+        //response.getWriter().write(result.toString());//当需要response输出的时候返回值一定要为空,此时返回值是这里的值（result.toString()）
     }
 
 //    @AfterReturning(returning = "ResultEntity", pointcut = "webLog()")

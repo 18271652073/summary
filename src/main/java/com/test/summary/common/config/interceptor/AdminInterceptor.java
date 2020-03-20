@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author Administrator
@@ -45,7 +46,7 @@ public class AdminInterceptor implements HandlerInterceptor {
     }
 
     /**
-     * 请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+     * 请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后，报错不执行，执行下面的afterCompletion）
      */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
@@ -56,8 +57,12 @@ public class AdminInterceptor implements HandlerInterceptor {
      * 在整个请求结束之后被调用，也就是在DispatcherServlet 渲染了对应的视图之后执行（主要是用于进行资源清理工作）
      */
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws IOException {
         System.out.println("执行了TestInterceptor的afterCompletion方法");
+        response.setHeader("content-type", "text/html;charset=UTF-8");
+        //response.getWriter().write("result.toString()");
+        //当需要response输出的时候返回值一定要为空,此时返回值是这里的值（result.toString()）,
+        //WebLogAspect有response时以WebLogAspect先输出此处拼接在后
     }
 
 
