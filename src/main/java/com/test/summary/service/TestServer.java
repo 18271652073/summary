@@ -9,6 +9,8 @@ import com.test.summary.common.config.datasource.TargetDataSource;
 import com.test.summary.common.constants.ApiConstant;
 import com.test.summary.common.constants.ResultEntity;
 import com.test.summary.common.utils.ExcelUtil;
+import com.test.summary.common.utils.ExcelUtilHelp;
+import com.test.summary.common.utils.TurnFile;
 import com.test.summary.dom.mysql.entity.OrderBase;
 import com.test.summary.dom.mysql.mapper.OrderBaseMapper;
 import com.test.summary.dom.sqlserver.entity.ItemSku;
@@ -21,7 +23,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -82,5 +89,22 @@ public class TestServer {
         return workbook;
     }
 
-
+    @Transactional
+    public ResultEntity importExcel(MultipartFile file) throws IOException {
+        //将文件按时间戳存起来 开始，也可以用uuid去掉-
+        String time = String.valueOf(System.currentTimeMillis());
+        TurnFile.multipartFileToFile(file, time);
+        //将文件按时间戳存起来 结束
+        if (file != null) {//将文件转化成list
+            InputStream ins = file.getInputStream();
+            File toFile = new File(file.getOriginalFilename());
+            ExcelUtilHelp.inputStreamToFile(ins, toFile);
+            ins.close();
+            List<Map> listMap = ExcelUtilHelp.readXlsxByStream(new FileInputStream(toFile));
+            for (Map map : listMap) {//遍历excel文件数据
+                String name = map.get("名字").toString();
+            }
+        }
+        return ResultEntity.error("1");
+    }
 }
