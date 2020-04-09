@@ -2,20 +2,25 @@ package com.test.summary.controller;
 
 import com.test.summary.common.component.RedisClient;
 import com.test.summary.common.component.logaspect.ApplyAnnotation;
+import com.test.summary.common.config.exception.BaseException;
 import com.test.summary.common.constants.ResultEntity;
+import com.test.summary.controller.common.BaseController;
 import com.test.summary.service.TestServer;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +31,7 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequestMapping(value = "/test")
-public class TestController {
+public class TestController extends BaseController {
 
     @Autowired
     private TestServer testServer;
@@ -85,6 +90,32 @@ public class TestController {
         System.out.println("2222222222222");
         System.out.println("1111111111111");
         return ResultEntity.ok().setResult(testServer.getSqlServer());
+    }
+
+    @ApiOperation(value = "选中导出", notes = "选中导出")
+    @RequestMapping(value = "/selectExportOrderInfo", method = RequestMethod.GET)
+    //@CrossOrigin
+    public void selectExportOrderInfo(HttpServletResponse response,
+                                      @ApiParam("客户号码") @RequestParam List<String> ids) throws Exception {
+        Workbook workbook = testServer.selectExportOrderInfo(ids);
+        if (null != workbook) {
+            prepareDownLoadResponse(response, "application/x-xls", "订单信息.xlsx");
+            ByteArrayOutputStream ostream = null;
+            ServletOutputStream stream = null;
+            try {
+                ostream = new ByteArrayOutputStream();
+                workbook.write(ostream);
+                stream = response.getOutputStream();
+                stream.write(ostream.toByteArray());
+                stream.flush();
+            } catch (IOException e) {
+                log.error("条件查询订单信息后导出出错", e);
+                throw new BaseException("条件查询订单信息后导出出错");
+            } finally {
+                stream.close();
+                ostream.close();
+            }
+        }
     }
 
 }

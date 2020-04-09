@@ -1,15 +1,20 @@
 package com.test.summary.service;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
 import com.test.summary.common.component.ConfigValueComponent;
 import com.test.summary.common.component.RedisClient;
 import com.test.summary.common.component.logaspect.ApplyAnnotation;
 import com.test.summary.common.config.datasource.TargetDataSource;
+import com.test.summary.common.constants.ApiConstant;
 import com.test.summary.common.constants.ResultEntity;
+import com.test.summary.common.utils.ExcelUtil;
 import com.test.summary.dom.mysql.entity.OrderBase;
 import com.test.summary.dom.mysql.mapper.OrderBaseMapper;
 import com.test.summary.dom.sqlserver.entity.ItemSku;
 import com.test.summary.dom.sqlserver.mapper.ItemSkuMapper;
 import com.test.summary.dom.sqlserver.repository.SysConfigRepository;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -18,6 +23,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Administrator
@@ -61,5 +69,18 @@ public class TestServer {
         ItemSku itemSku = sysConfigRepository.getDes3Key("12312", "100000000PCS");
         return itemSku.toString();
     }
+
+    public Workbook selectExportOrderInfo(List<String> ids) {
+        TemplateExportParams params = new TemplateExportParams(ExcelUtil.convertTemplatePath(ApiConstant.ORDER_INFO_ERROR));
+        Map<String, Object> map = new HashMap();
+        Integer curPage = 1;//每页二十万，导出最大为200000;
+        Integer pageSize = 200000;
+        //List<Map> exportMap = orderBaseMapper.selectExportOrderInfo(ids);
+        List<Map> exportMap = null;
+        map.put("list", exportMap);
+        Workbook workbook = ExcelExportUtil.exportExcel(params, map);
+        return workbook;
+    }
+
 
 }
