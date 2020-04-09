@@ -72,13 +72,15 @@ public class TestController {
     @ApiOperation(value = "getMysql", notes = "getMysql")
     @RequestMapping(value = "/getMysql", method = RequestMethod.POST)
     public ResultEntity getMysql() {
-        return testServer.getMysql();
+        ResultEntity resultEntity = testServer.getMysql();
+//        return ResultEntity.ok("1111");
+        return resultEntity;
     }
 
     @ResponseBody
     @ApiOperation(value = "getSqlServer", notes = "getSqlServer")
     @RequestMapping(value = "/getSqlServer", method = RequestMethod.POST)
-    @ApplyAnnotation
+    //@ApplyAnnotation
     public ResultEntity getSqlServer() {
         System.out.println("2222222222222");
         System.out.println("1111111111111");

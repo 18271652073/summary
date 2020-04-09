@@ -3,6 +3,7 @@ package com.test.summary.service;
 import com.test.summary.common.component.ConfigValueComponent;
 import com.test.summary.common.component.RedisClient;
 import com.test.summary.common.component.logaspect.ApplyAnnotation;
+import com.test.summary.common.config.datasource.TargetDataSource;
 import com.test.summary.common.constants.ResultEntity;
 import com.test.summary.dom.mysql.entity.OrderBase;
 import com.test.summary.dom.mysql.mapper.OrderBaseMapper;
@@ -37,19 +38,22 @@ public class TestServer {
     @Autowired
     private SysConfigRepository sysConfigRepository;
 
-    @Transactional(rollbackFor = Exception.class, transactionManager = "transactionManagerMySql")
+
+    //@Transactional(rollbackFor = Exception.class, transactionManager = "transactionManagerMySql")
 //    , isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED
-    @ApplyAnnotation
+    //@ApplyAnnotation
+    @TargetDataSource(name = "ds1")//使用后生效了，但是结果无法传到，是由于使用@ApplyAnnotation的缘故
+    @Transactional
     public ResultEntity getMysql() {
         OrderBase orderBase = orderBaseMapper.selectByPrimaryKey(2);
-        orderBase.setCustomerName("test1");
+        orderBase.setCustomerName("test3");
 //        configValueComponent.ss();
         orderBaseMapper.updateByPrimaryKey(orderBase);
-//        int a = 1 / 0;
+        int a = 1 / 0;
         return ResultEntity.ok().setResult(orderBase.toString());
     }
 
-    @ApplyAnnotation
+    @TargetDataSource(name = "ds2")
     public String getSqlServer() {
         redisClient.set("测试", "测试", 6000l);
         redisClient.set("test", "test", 6000l);
