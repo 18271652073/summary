@@ -43,11 +43,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
+        <!--用于读取配置文件，但是会出现造成kafak，数据源等无法读取-->
+        <!--//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-configuration-processor</artifactId>-->
+        <!--            <optional>true</optional>-->
+        <!--        </dependency>-->
+        <!--用于读取配置文件 结束-->
         <!--添加分页插件-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
@@ -147,11 +150,11 @@
         <!-- PropertiesLoader里用到结束 -->
 
         <!-- CXF webservice -->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.cxf</groupId>-->
-<!--            <artifactId>cxf-spring-boot-starter-jaxws</artifactId>-->
-<!--            <version>3.1.11</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.cxf</groupId>-->
+        <!--            <artifactId>cxf-spring-boot-starter-jaxws</artifactId>-->
+        <!--            <version>3.1.11</version>-->
+        <!--        </dependency>-->
         <!-- CXF webservice -->
 
         <!-- shiro 依赖 -->
@@ -184,7 +187,34 @@
             <version>3.0.3</version>
         </dependency>
         <!--导入easypoi end-->
-
+        <!--kafka begin-->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+            <!--<version>1.1.1.RELEASE</version>-->
+            <!--springboot2.0以上只能使用2.0以上kafka-->
+        </dependency>
+        <!--kafka end-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.google.code.gson</groupId>-->
+        <!--            <artifactId>gson</artifactId>-->
+        <!--            <version>2.8.2</version>-->
+        <!--        </dependency>-->
+        <!--fastjson begin-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.51</version>
+        </dependency>
+        <!--fastjson end-->
+        <!-- json依赖 begin-->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
+        </dependency>
+        <!-- json依赖 end-->
     </dependencies>
 
     <build>
