@@ -20,11 +20,8 @@ public class KafkaReceiver {
 
     @KafkaListener(topics = {TopicsConstants.TOPICS_TEST, TopicsConstants.TOPICS_TEST1})
     public void listen(ConsumerRecord<?, ?> record) {
-
         Optional<?> kafkaMessage = Optional.ofNullable(record.value());
-
         if (kafkaMessage.isPresent()) {
-
             Object messageObj = kafkaMessage.get();
             JSONObject jsonObject = JSONObject.fromObject(messageObj);
             Message message = (Message) JSONObject.toBean(jsonObject, Message.class);
@@ -32,6 +29,13 @@ public class KafkaReceiver {
             log.info("----------------- record =" + record);
             log.info("------------------ message =" + message + "id:" + message.getId());
         }
+    }
 
+    @KafkaListener(topics = {TopicsConstants.TOPICS_TEST1, TopicsConstants.TOPICS_TEST2})
+    public void listen2(String messageObj) {
+        JSONObject jsonObject = JSONObject.fromObject(messageObj);
+        Message message = (Message) JSONObject.toBean(jsonObject, Message.class);
+        // TODO: 2020/4/10 对监听的数据进行处理,根据id或者其他的确定数据
+        log.info("------------------ listen2 message =" + message + "id:" + message.getId());
     }
 }
