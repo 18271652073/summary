@@ -19,6 +19,7 @@ import com.test.summary.dom.sqlserver.repository.SysConfigRepository;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -106,5 +107,12 @@ public class TestServer {
             }
         }
         return ResultEntity.error("1");
+    }
+
+    @Async("executor")
+    public void testThread(String userName, String msg) throws InterruptedException {
+        System.out.println("------------testThread begin");
+        Thread.sleep(10000l);
+        System.out.println("------------testThread end");
     }
 }
