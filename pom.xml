@@ -45,11 +45,11 @@
         </dependency>
         <!--用于读取配置文件，但是会出现造成kafak，数据源等无法读取-->
         <!--//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-configuration-processor</artifactId>-->
-        <!--            <optional>true</optional>-->
-        <!--        </dependency>-->
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-configuration-processor</artifactId>
+                    <optional>true</optional>
+                </dependency>
         <!--用于读取配置文件 结束-->
         <!--添加分页插件-->
         <dependency>

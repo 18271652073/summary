@@ -8,10 +8,12 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @Import({DynamicDataSourceRegister.class})
+@ImportResource("classpath:applicationContext-tx.xml")
 @MapperScan("com.test.summary.dom.*.mapper")
 @EnableTransactionManagement //开启事务管理
 public class SummaryApplication {

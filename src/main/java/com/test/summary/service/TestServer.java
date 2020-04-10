@@ -60,10 +60,10 @@ public class TestServer {
 //    , isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED
     //@ApplyAnnotation
     @TargetDataSource(name = "ds1")//使用后生效了，但是结果无法传到，是由于使用@ApplyAnnotation的缘故
-    @Transactional
-    public ResultEntity getMysql() {
+    //@Transactional
+    public ResultEntity updateSqlServer() {
         OrderBase orderBase = orderBaseMapper.selectByPrimaryKey(2);
-        orderBase.setCustomerName("test3");
+        orderBase.setCustomerName("test4");
 //        configValueComponent.ss();
         orderBaseMapper.updateByPrimaryKey(orderBase);
         int a = 1 / 0;

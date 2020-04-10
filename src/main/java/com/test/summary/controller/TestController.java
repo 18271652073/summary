@@ -77,7 +77,7 @@ public class TestController extends BaseController {
     @ApiOperation(value = "getMysql", notes = "getMysql")
     @RequestMapping(value = "/getMysql", method = RequestMethod.POST)
     public ResultEntity getMysql() {
-        ResultEntity resultEntity = testServer.getMysql();
+        ResultEntity resultEntity = testServer.updateSqlServer();
 //        return ResultEntity.ok("1111");
         return resultEntity;
     }
