@@ -53,5 +53,13 @@ public class KafkaController {
         return ResultEntity.ok("testThread成功！");
     }
 
+    @ApiOperation(value = "testThread1", notes = "testThread1")
+    @RequestMapping(value = "/testThread1", method = RequestMethod.GET)
+    public ResultEntity testThread1(@ApiParam("名称") @NotEmpty(message = "名称非空！") @RequestParam(required = false) String userName,
+                                    @ApiParam("详细消息") @NotEmpty(message = "消息非空！") @RequestParam(required = false) String msg) throws InterruptedException {
+        testServer.testThread1(userName, msg);
+        return ResultEntity.ok("testThread1成功！");
+    }
+
 
 }

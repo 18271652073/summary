@@ -42,6 +42,7 @@ import java.util.Map;
 @Service
 public class TestServer {
 
+    private static Integer BASE = 0;
     @Autowired
 //    @Qualifier("sqlSessionTemplateMysql")
     private OrderBaseMapper orderBaseMapper;
@@ -111,6 +112,29 @@ public class TestServer {
 
     @Async("executor")
     public void testThread(String userName, String msg) throws InterruptedException {
+        System.out.println("------------testThread begin");
+        Thread.sleep(10000l);
+        System.out.println("------------testThread end");
+    }
+
+    public void testThread1(String userName, String msg) throws InterruptedException {
+        this.BASE=500;
+        //创建一个 Thread 的子类对象
+        new Thread(  //把这里面的东西作为 Thread 的构造参数传入进去
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        for (int i = 0; i < 500; i++) {
+                            System.out.println("子线程在执行...." + i);
+                            System.out.println((BASE--));//操作的是同一个BASE，展示的可能有点慢
+                        }
+                    }
+                }
+        ).start();
+        for (int i = 0; i < 100; i++) {
+            System.out.println("主线程在执行...." + i);
+            System.out.println((BASE--));
+        }
         System.out.println("------------testThread begin");
         Thread.sleep(10000l);
         System.out.println("------------testThread end");
