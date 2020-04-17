@@ -83,6 +83,7 @@ public class TestServer {
         OrderBase orderBase = orderBaseMapper.selectByPrimaryKey(2);
         orderBase.setCustomerName("test5");
         orderBaseMapper.updateByPrimaryKey(orderBase);
+        int a = 1 / 0;
         return ResultEntity.ok().setResult(orderBase.toString());
     }
 

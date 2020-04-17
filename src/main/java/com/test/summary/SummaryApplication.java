@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @Import({DynamicDataSourceRegister.class})
-@ImportResource("classpath:applicationContext-tx.xml")
+//@ImportResource("classpath:applicationContext-tx.xml")//TransactionConfig
 @MapperScan("com.test.summary.dom.*.mapper")
 @EnableTransactionManagement //开启事务管理
 public class SummaryApplication {
