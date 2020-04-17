@@ -76,9 +76,19 @@ public class TestController extends BaseController {
     @ResponseBody
     @ApiOperation(value = "getMysql", notes = "getMysql")
     @RequestMapping(value = "/getMysql", method = RequestMethod.POST)
-    public ResultEntity getMysql() {
+    public ResultEntity getMysql() throws InterruptedException {
+        System.out.println("+++++++++++++testThread begin");
         ResultEntity resultEntity = testServer.updateSqlServer();
-//        return ResultEntity.ok("1111");
+        System.out.println("+++++++++++++testThread end");
+        return ResultEntity.ok("1111");
+//        return resultEntity;
+    }
+
+    @ResponseBody
+    @ApiOperation(value = "getMysql1", notes = "getMysql1")
+    @RequestMapping(value = "/getMysql1", method = RequestMethod.POST)
+    public ResultEntity getMysql1() throws InterruptedException {
+        ResultEntity resultEntity = testServer.updateSqlServer1();
         return resultEntity;
     }
 

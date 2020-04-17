@@ -10,6 +10,7 @@ import com.test.summary.common.constants.ApiConstant;
 import com.test.summary.common.constants.ResultEntity;
 import com.test.summary.common.utils.ExcelUtil;
 import com.test.summary.common.utils.ExcelUtilHelp;
+import com.test.summary.common.utils.SpringContextUtils;
 import com.test.summary.common.utils.TurnFile;
 import com.test.summary.dom.mysql.entity.OrderBase;
 import com.test.summary.dom.mysql.mapper.OrderBaseMapper;
@@ -19,6 +20,7 @@ import com.test.summary.dom.sqlserver.repository.SysConfigRepository;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -54,19 +56,33 @@ public class TestServer {
     private RedisClient redisClient;
     @Autowired
     private SysConfigRepository sysConfigRepository;
+    @Autowired
+    private AsyncService asyncService;
 
 
     //@Transactional(rollbackFor = Exception.class, transactionManager = "transactionManagerMySql")
 //    , isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED
     //@ApplyAnnotation
+    @Async("executor")
     @TargetDataSource(name = "ds1")//使用后生效了，但是结果无法传到，是由于使用@ApplyAnnotation的缘故
-    //@Transactional
-    public ResultEntity updateSqlServer() {
+    @Transactional
+    //当此处有事务时后面的都会生效（猜想：由于先异步再声明数据源和事务。如过没有数据源则事务不生效），当调用另一个service就失效。需要SpringContextUtils重新生成调用另一个带事务的方法才生效
+    public ResultEntity updateSqlServer() throws InterruptedException {
+//        AsyncService asyncService = SpringContextUtils.getContext().getBean(AsyncService.class);
         OrderBase orderBase = orderBaseMapper.selectByPrimaryKey(2);
         orderBase.setCustomerName("test4");
 //        configValueComponent.ss();
         orderBaseMapper.updateByPrimaryKey(orderBase);
-        int a = 1 / 0;
+        asyncService.testThread("3", "3");
+        //int a = 1 / 0;
+        return ResultEntity.ok().setResult(orderBase.toString());
+    }
+
+    @TargetDataSource(name = "ds1")
+    public ResultEntity updateSqlServer1() {
+        OrderBase orderBase = orderBaseMapper.selectByPrimaryKey(2);
+        orderBase.setCustomerName("test5");
+        orderBaseMapper.updateByPrimaryKey(orderBase);
         return ResultEntity.ok().setResult(orderBase.toString());
     }
 
@@ -118,7 +134,7 @@ public class TestServer {
     }
 
     public void testThread1(String userName, String msg) throws InterruptedException {
-        this.BASE=500;
+        this.BASE = 500;
         //创建一个 Thread 的子类对象
         new Thread(  //把这里面的东西作为 Thread 的构造参数传入进去
                 new Runnable() {
