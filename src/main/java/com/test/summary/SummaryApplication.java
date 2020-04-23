@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class SummaryApplication {
 
     public static void main(String[] args) {
+        System.setProperty("es.set.netty.runtime.available.processors", "false");
         SpringApplication.run(SummaryApplication.class, args);
         //http://localhost:8081/summary/services/service?wsdl
         //由于用的spring版本较低，server.servlet.context-path不生效所以不用summary
