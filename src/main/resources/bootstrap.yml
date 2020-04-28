@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        enabled: true
+        server-addr: 192.168.99.38:8848
+        file-extension: yml
+        group: DEFAULT_GROUP
+        encode: UTF-8
+        namespace:
+      discovery:
+        server-addr: 192.168.99.38:8848
+        namespace:
+
+#namespace 注意这里是nacos生成的字符串而不是dev
+#spring.cloud.nacos.config.namespace=3a249343-bee8-4e97-9111-6070a001b343
+#spring.cloud.nacos.discovery.namespace=3a249343-bee8-4e97-9111-6070a001b343
