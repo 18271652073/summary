@@ -39,6 +39,7 @@ public class TestMain {
 
         String content = "0713-1234567";
         String content1 = "17131234567";
+        String content4 = "test";
         String content2 = "I am noob " + "from runoob.com.";
         String pattern = "^\\d{4}\\-?\\d{7}$";
         boolean isMatch = Pattern.matches(pattern, content);
