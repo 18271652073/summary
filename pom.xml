@@ -328,7 +328,7 @@
     </profiles>
 
     <build>
-        <defaultGoal>compile</defaultGoal>
+        <defaultGoal>package</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
