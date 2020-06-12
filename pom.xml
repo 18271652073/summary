@@ -5,10 +5,10 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-<!--        <version>2.2.5.RELEASE</version>-->
+        <!--        <version>2.2.5.RELEASE</version>-->
         <!--		<version>1.4.5.RELEASE</version>-->
         <!--                <version>1.5.7.RELEASE</version>-->
-                <version>2.0.2.RELEASE</version>
+        <version>2.0.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.test</groupId>
@@ -42,6 +42,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <!--ctuator和监控图形化-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>2.0.5</version>
         </dependency>
         <!--添加mybatis依赖-->
         <dependency>
@@ -240,30 +250,30 @@
         </dependency>
 
         <!-- nacos 依赖 -->
-                <dependency>
-                    <groupId>com.alibaba.boot</groupId>
-                    <artifactId>nacos-discovery-spring-boot-starter</artifactId>
-                    <version>0.2.1</version>
-                </dependency>
-                <dependency>
-                    <groupId>com.alibaba.boot</groupId>
-                    <artifactId>nacos-config-spring-boot-starter</artifactId>
-                    <version>0.2.1</version>
-                </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>nacos-discovery-spring-boot-starter</artifactId>
+            <version>0.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>nacos-config-spring-boot-starter</artifactId>
+            <version>0.2.1</version>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+        <!--        </dependency>-->
         <!-- minio 依赖 -->
-<!--        <dependency>-->
-<!--            <groupId>com.jlefebure</groupId>-->
-<!--            <artifactId>spring-boot-starter-minio</artifactId>-->
-<!--            <version>1.1</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.jlefebure</groupId>-->
+        <!--            <artifactId>spring-boot-starter-minio</artifactId>-->
+        <!--            <version>1.1</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
@@ -271,24 +281,24 @@
         </dependency>
     </dependencies>
 
-<!--    <dependencyManagement>-->
-<!--        <dependencies>-->
-<!--&lt;!&ndash;            <dependency>&ndash;&gt;-->
-<!--&lt;!&ndash;                <groupId>org.springframework.cloud</groupId>&ndash;&gt;-->
-<!--&lt;!&ndash;                <artifactId>spring-cloud-dependencies</artifactId>&ndash;&gt;-->
-<!--&lt;!&ndash;                <version>Edgware.SR4</version>&ndash;&gt;-->
-<!--&lt;!&ndash;                <type>pom</type>&ndash;&gt;-->
-<!--&lt;!&ndash;                <scope>import</scope>&ndash;&gt;-->
-<!--&lt;!&ndash;            </dependency>&ndash;&gt;-->
-<!--            <dependency>-->
-<!--                <groupId>com.alibaba.cloud</groupId>-->
-<!--                <artifactId>spring-cloud-alibaba-dependencies</artifactId>-->
-<!--                <version>2.2.0.RELEASE</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
-<!--        </dependencies>-->
-<!--    </dependencyManagement>-->
+    <!--    <dependencyManagement>-->
+    <!--        <dependencies>-->
+    <!--&lt;!&ndash;            <dependency>&ndash;&gt;-->
+    <!--&lt;!&ndash;                <groupId>org.springframework.cloud</groupId>&ndash;&gt;-->
+    <!--&lt;!&ndash;                <artifactId>spring-cloud-dependencies</artifactId>&ndash;&gt;-->
+    <!--&lt;!&ndash;                <version>Edgware.SR4</version>&ndash;&gt;-->
+    <!--&lt;!&ndash;                <type>pom</type>&ndash;&gt;-->
+    <!--&lt;!&ndash;                <scope>import</scope>&ndash;&gt;-->
+    <!--&lt;!&ndash;            </dependency>&ndash;&gt;-->
+    <!--            <dependency>-->
+    <!--                <groupId>com.alibaba.cloud</groupId>-->
+    <!--                <artifactId>spring-cloud-alibaba-dependencies</artifactId>-->
+    <!--                <version>2.2.0.RELEASE</version>-->
+    <!--                <type>pom</type>-->
+    <!--                <scope>import</scope>-->
+    <!--            </dependency>-->
+    <!--        </dependencies>-->
+    <!--    </dependencyManagement>-->
 
     <profiles>
         <!-- local为本地开发版 -->
