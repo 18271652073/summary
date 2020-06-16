@@ -1,6 +1,7 @@
 package com.test.summary.controller;
 
 import com.test.summary.common.component.RedisClient;
+import com.test.summary.common.component.idempotent.Idempotent;
 import com.test.summary.common.component.logaspect.ApplyAnnotation;
 import com.test.summary.common.config.exception.BaseException;
 import com.test.summary.common.constants.ResultEntity;
@@ -100,6 +101,17 @@ public class TestController extends BaseController {
         System.out.println("2222222222222");
         System.out.println("1111111111111");
         return ResultEntity.ok().setResult(testServer.getSqlServer());
+    }
+
+    @ResponseBody
+    @ApiOperation(value = "idempotentTest", notes = "idempotentTest")
+    @RequestMapping(value = "/idempotentTest", method = RequestMethod.POST)
+    @Idempotent(expirMillis = 1000)
+    public ResultEntity idempotentTest(@ApiParam("12") @RequestParam List<String> ids,
+                                       @ApiParam("1212") @RequestParam List<String> id) {
+        System.out.println(ids);
+        System.out.println(id);
+        return ResultEntity.ok().setResult("123123");
     }
 
     @ApiOperation(value = "选中导出", notes = "选中导出")
