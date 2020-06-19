@@ -41,6 +41,7 @@ public class IdempotentAspect {
     /**
      * 切点业务
      * 不依赖Redis的异步客户端lettuce(pom里去掉)
+     *
      * @throws Throwable
      */
     @Around("executeIdempotent()")
@@ -63,7 +64,7 @@ public class IdempotentAspect {
         if (Objects.equals("OK", redisRes)) {
             return jPoint.proceed();
         } else {
-            throw new CustomMessageException("sorry!! Interface duplicates requests, violating idempotency.");
+            throw new CustomMessageException("sorry!! 幂等操作!");
 //            System.err.println("数据错误");
 //            return null;
         }
