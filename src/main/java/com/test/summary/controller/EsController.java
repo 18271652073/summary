@@ -2,6 +2,7 @@ package com.test.summary.controller;
 
 import com.test.summary.common.constants.ResultEntity;
 import com.test.summary.service.EsService;
+import com.test.summary.service.ThreadService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
@@ -26,13 +27,23 @@ public class EsController {
 
     @Autowired
     private EsService esService;
+    @Autowired
+    private ThreadService threadService;
 
     @ApiOperation(value = "getEs", notes = "getEs")
     @RequestMapping(value = "/getEs", method = RequestMethod.GET)
     public ResultEntity getEs(@ApiParam("名称") @NotEmpty(message = "名称非空！") @RequestParam(required = false) String userName,
-                                   @ApiParam("详细消息") @NotEmpty(message = "消息非空！") @RequestParam(required = false) String msg) throws InterruptedException {
+                              @ApiParam("详细消息") @NotEmpty(message = "消息非空！") @RequestParam(required = false) String msg) throws InterruptedException {
         //esService.getEs();
         return ResultEntity.ok("testThread成功！");
+    }
+
+    @ApiOperation(value = "executorThread", notes = "executorThread")
+    @RequestMapping(value = "/executorThread", method = RequestMethod.GET)
+    public ResultEntity executorThread(@ApiParam("名称") @NotEmpty(message = "名称非空！") @RequestParam(required = false) String userName,
+                                       @ApiParam("详细消息") @NotEmpty(message = "消息非空！") @RequestParam(required = false) String msg) {
+        return threadService.executorThread();
+        //return ResultEntity.ok("testThread成功！");
     }
 
 }
